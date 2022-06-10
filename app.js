@@ -59,6 +59,12 @@ app.put('/campgrounds/:id', async (req, res) => {
   //find by that id in argument 1 and second argument is the query to update
   const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
   res.redirect(`/campgrounds/${campground._id}`)
+});
+//delete individual campgrounds
+app.delete('/campgrounds/:id', async (req, res) => {
+  const { id } = req.params;
+  await Campground.findByIdAndDelete(id);
+  res.redirect('/campgrounds');
 })
 
 app.listen(3000, () => {
