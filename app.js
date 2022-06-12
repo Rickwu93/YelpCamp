@@ -31,41 +31,43 @@ app.get('/', (req, res) => {
 });
 app.get('/campgrounds', async (req, res) => {
 	const campgrounds = await Campground.find({});
-  res.render('campgrounds/index', { campgrounds })
+	res.render('campgrounds/index', { campgrounds });
 });
 
 app.get('/campgrounds/new', (req, res) => {
-  res.render('campgrounds/new');
-})
+	res.render('campgrounds/new');
+});
 //post request for creating new campground that would save and redirect back to the campground id
 app.post('/campgrounds', async (req, res) => {
-  const campground = new Campground(req.body.campground);
-  await campground.save();
-  res.redirect(`/campgrounds/${campground._id}`)
-})
+	const campground = new Campground(req.body.campground);
+	await campground.save();
+	res.redirect(`/campgrounds/${campground._id}`);
+});
 
 app.get('/campgrounds/:id', async (req, res) => {
-  const campground = await Campground.findById(req.params.id)
-  res.render('campgrounds/show', { campground });
+	const campground = await Campground.findById(req.params.id);
+	res.render('campgrounds/show', { campground });
 });
 
 app.get('/campgrounds/:id/edit', async (req, res) => {
-  const campground = await Campground.findById(req.params.id)
-  res.render('campgrounds/edit', { campground });
-})
+	const campground = await Campground.findById(req.params.id);
+	res.render('campgrounds/edit', { campground });
+});
 
 app.put('/campgrounds/:id', async (req, res) => {
-  const { id } = req.params;
-  //find by that id in argument 1 and second argument is the query to update
-  const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
-  res.redirect(`/campgrounds/${campground._id}`)
+	const { id } = req.params;
+	//find by that id in argument 1 and second argument is the query to update
+	const campground = await Campground.findByIdAndUpdate(id, {
+		...req.body.campground,
+	});
+	res.redirect(`/campgrounds/${campground._id}`);
 });
 //delete individual campgrounds
 app.delete('/campgrounds/:id', async (req, res) => {
-  const { id } = req.params;
-  await Campground.findByIdAndDelete(id);
-  res.redirect('/campgrounds');
-})
+	const { id } = req.params;
+	await Campground.findByIdAndDelete(id);
+	res.redirect('/campgrounds');
+});
 
 app.listen(3000, () => {
 	console.log('Serving on port 3000');
