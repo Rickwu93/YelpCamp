@@ -24,10 +24,14 @@ const seedDB = async () => {
 	//generates 50 random cities by their state to return new campground locations
 	for (let i = 0; i < 50; i++) {
 		const random1000 = Math.floor(Math.random() * 1000);
+    const price = Math.floor(Math.random() * 20) + 10;
 		const camp = new Campground({
 			location: `${cities[random1000].city}, ${cities[random1000].state}`,
 			title: `${sample(descriptors)} ${sample(places)}`,
-		});
+      image: 'https://source.unsplash.com/collection/138884',
+      description: 'The teams include BLAST Spring Groups winners FaZe, OG, and Vitality, as well as runner-ups Natus Vincere, BIG, and G2. Rounding out the list are BLAST Spring Showdown EU winners ENCE, who have also shown their worth at various recent tournaments, climbing to the second spot in the world rankings, and BLAST Spring Showdown NA champions, paiN.',
+      price
+		})
 		await camp.save();
 	}
 };
