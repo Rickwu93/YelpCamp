@@ -36,6 +36,7 @@ app.use(methodOverride('_method')); //we call method override with _method
 //to use campground routes and prefix it with /campgrounds and use the campground routes
 app.use('/campgrounds', campgrounds)
 app.use('/campgrounds/:id/reviews', reviews)
+app.use(express.static(path.join(__dirname, 'public')))
 
 
 app.get('/', (req, res) => {
