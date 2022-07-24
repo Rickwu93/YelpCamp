@@ -6,6 +6,9 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
 
 
 const campgrounds = require('./routes/campgrounds');
@@ -45,13 +48,29 @@ const sessionConfig = {
 		maxAge: 1000 * 60 * 60 * 24 * 7
 	}
 }
+//session has to come before passport
 app.use(session(sessionConfig))
 app.use(flash());
+
+//to use passport, use the localstrategy and tell it to use the authentication method located on our user model
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+//telling passport how to serialize a user in and out of a session
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 //middleware for before every route handlers and have access to it over local and success
 app.use((req, res, next) => {
 	res.locals.success = req.flash('success');
 	res.locals.error = req.flash('error');
 	next();
+})
+//creating a fake user route to test above passport methods
+app.get('/fakeUser', async (req, res) => {
+		const user = new User({email: 'test123@gmail.com', username: 'test123' })
+		const newUser = await User.register(user, 'chicken');
+		res.send(newUser);
 })
 
 //to use campground routes and prefix it with /campgrounds and use the campground routes
