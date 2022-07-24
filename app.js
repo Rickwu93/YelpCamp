@@ -11,8 +11,9 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 
 
-const campgrounds = require('./routes/campgrounds');
-const reviews = require('./routes/reviews');
+const userRoutes = require('./routes/users');
+const campgroundRoutes = require('./routes/campgrounds');
+const reviewRoutes = require('./routes/reviews');
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp', err => {
 	if (err) {
@@ -66,17 +67,13 @@ app.use((req, res, next) => {
 	res.locals.error = req.flash('error');
 	next();
 })
-//creating a fake user route to test above passport methods
-app.get('/fakeUser', async (req, res) => {
-		const user = new User({email: 'test123@gmail.com', username: 'test123' })
-		const newUser = await User.register(user, 'chicken');
-		res.send(newUser);
-})
+
 
 //to use campground routes and prefix it with /campgrounds and use the campground routes
-app.use('/campgrounds', campgrounds)
-app.use('/campgrounds/:id/reviews', reviews)
-app.use(express.static(path.join(__dirname, 'public')))
+app.use('/', userRoutes);
+app.use('/campgrounds', campgroundRoutes)
+app.use('/campgrounds/:id/reviews', reviewRoutes)
+// app.use(express.static(path.join(__dirname, 'public')))
 
 
 app.get('/', (req, res) => {
