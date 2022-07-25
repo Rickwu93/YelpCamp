@@ -29,9 +29,12 @@ router.get('/login', (req, res) => {
     res.render('users/login');
 })
 //password authenticate using local strategy, redirect to login if there's a failure redirect or flash failure message if there is
+//redirect user back to original session or to /campgrounds
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
     req.flash('success', 'Welcome back!');
-    res.redirect('/campgrounds');
+    const redirectUrl = req.session.returnTo || '/campgrounds';
+    delete req.session.returnTo;
+    res.redirect(redirectUrl);
 })
 
 router.get('/logout', (req, res, next) => {
