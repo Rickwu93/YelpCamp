@@ -29,9 +29,18 @@ const seedDB = async () => {
 			author: '62de1577676cafa3e9dff9fc',
 			location: `${cities[random1000].city}, ${cities[random1000].state}`,
 			title: `${sample(descriptors)} ${sample(places)}`,
-      image: 'https://source.unsplash.com/collection/138884',
       description: 'The teams include BLAST Spring Groups winners FaZe, OG, and Vitality, as well as runner-ups Natus Vincere, BIG, and G2. Rounding out the list are BLAST Spring Showdown EU winners ENCE, who have also shown their worth at various recent tournaments, climbing to the second spot in the world rankings, and BLAST Spring Showdown NA champions, paiN.',
-      price
+      price,
+			images: [
+				{
+					url: 'https://res.cloudinary.com/dorxtl6b6/image/upload/v1659326029/YelpCamp/yui60wvinjkmzv7hx9ze.webp',
+					filename: 'YelpCamp/yui60wvinjkmzv7hx9ze',
+				},
+				{
+					url: 'https://res.cloudinary.com/dorxtl6b6/image/upload/v1659326030/YelpCamp/ygwrfrxex7abrki90mya.png',
+					filename: 'YelpCamp/ygwrfrxex7abrki90mya',
+				}
+			]
 		})
 		await camp.save();
 	}
