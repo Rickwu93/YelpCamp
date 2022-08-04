@@ -15,6 +15,7 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
+const helmet = require('helmet');
 
 const mongoSanitize = require('express-mongo-sanitize');
 
@@ -63,8 +64,20 @@ const sessionConfig = {
 	}
 }
 //session has to come before passport
-app.use(session(sessionConfig))
+app.use(session(sessionConfig));
 app.use(flash());
+
+app.use(helmet.dnsPrefetchControl());
+app.use(helmet.expectCt());
+app.use(helmet.frameguard());
+app.use(helmet.hidePoweredBy());
+app.use(helmet.hsts());
+app.use(helmet.ieNoOpen());
+app.use(helmet.noSniff());
+app.use(helmet.originAgentCluster());
+app.use(helmet.permittedCrossDomainPolicies());
+app.use(helmet.referrerPolicy());
+app.use(helmet.xssFilter());
 
 //to use passport, use the localstrategy and tell it to use the authentication method located on our user model
 app.use(passport.initialize());
