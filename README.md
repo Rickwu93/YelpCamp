@@ -16,6 +16,14 @@ You can visit the Heroku hosted website at: https://silent-hill-camps.herokuapp.
 - 5-star ratings system is added alongside review comments to allow users to rate campgrounds.
 - Campgrounds, reviews, ratings, and user information is safely stored in MongoDB with added Joi html sanitization and Helmet validations.
 
+## Project Images
+
+![landing page](/docs/images/landing page.png)
+![register](docs/images/register.png)
+![login page](docs/images/Signin.png)
+![List of campgrounds](docs/images/all campgrounds.png)
+![Campground](docs/images/campground page.png)
+![New Campground](docs/images/new campgrounds.png)
 
 ## Languages, Frameworks and Tech Stacks
 
