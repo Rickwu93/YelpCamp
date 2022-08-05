@@ -18,17 +18,17 @@ You can visit the Heroku hosted website at: https://silent-hill-camps.herokuapp.
 
 ## Project Images
 
-![landing page](./docs/images/landing page.png)
+![landing page](./docs/images/landing.png)
 
-![register](./docs/images/register.png)
+![register](docs/images/register.png)
 
-![login page](./docs/images/Signin.png)
+![login page](docs/images/Signin.png)
 
-![List of campgrounds](./docs/images/all campgrounds.png)
+![List of campgrounds](docs/images/all.png)
 
-![Campground](./docs/images/campground page.png)
+![Campground](docs/images/camp.png)
 
-![New Campground](./docs/images/new campgrounds.png)
+![New Campground](docs/images/new.png)
 
 ## Languages, Frameworks and Tech Stacks
 
